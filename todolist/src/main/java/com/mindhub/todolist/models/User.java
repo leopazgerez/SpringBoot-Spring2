@@ -12,14 +12,10 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    private final long id;
+    private long id;
     private String userName, password, email;
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
-
-    public User(long id) {
-        this.id = id;
-    }
 
     public long getId() {
         return id;

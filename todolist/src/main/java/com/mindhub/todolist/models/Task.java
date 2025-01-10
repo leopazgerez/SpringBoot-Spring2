@@ -18,6 +18,7 @@ public class Task {
     @ManyToOne()
     private User user;
 
+
     public long getId() {
         return id;
     }
