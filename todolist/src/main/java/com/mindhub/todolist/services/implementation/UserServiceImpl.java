@@ -9,6 +9,7 @@ import com.mindhub.todolist.models.User;
 import com.mindhub.todolist.repositories.UserRepository;
 import com.mindhub.todolist.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,9 +47,9 @@ public class UserServiceImpl implements UserService {
 
     //Actualizo los datos del usuario que encuentro
     @Override
-    public UserDTO updateUser(Long id, UserDTO userDTO) {
-        if (userRepository.existsById(id)) {
-            return userRepository.findById(id).map(existingUser -> {
+    public UserDTO updateUser(UserDTO userDTO, String username) {
+        if (userRepository.existsByUserName(username)) {
+            return userRepository.findByUserName(username).map(existingUser -> {
                 existingUser.setUserName(userDTO.getName());
                 existingUser.setEmail(userDTO.getEmail());
 //                guardo en la base de datos

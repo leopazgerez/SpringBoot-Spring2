@@ -26,8 +26,7 @@ public class JwtUtils {
     }
 
     public String generateToken(String username) {
-        return Jwts.builder()
-                .subject(username)
+        return Jwts.builder()// Usa "claim" para agregar otros campos
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))

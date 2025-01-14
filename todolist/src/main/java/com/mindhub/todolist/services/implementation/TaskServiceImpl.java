@@ -10,6 +10,8 @@ import com.mindhub.todolist.repositories.TaskRepository;
 import com.mindhub.todolist.repositories.UserRepository;
 import com.mindhub.todolist.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,16 +19,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-    private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
-    private final TaskMapper taskMapper;
-
     @Autowired
-    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, TaskMapper taskMapper) {
-        this.taskRepository = taskRepository;
-        this.userRepository = userRepository;
-        this.taskMapper = taskMapper;
-    }
+    private TaskRepository taskRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private TaskMapper taskMapper;
 
     @Override
     public TaskDTO createTask(TaskDTO taskDTO) {
@@ -70,5 +68,33 @@ public class TaskServiceImpl implements TaskService {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new TaskNotFoundException("Task not found"));
         taskRepository.delete(task);
+    }
+
+    public List<TaskDTO> getTasksForCurrentUser() {
+        User currentUser = getCurrentUser();
+        return taskRepository.findByUserId(currentUser.getId());
+    }
+
+    public void deleteTaskForCurrentUser(Long taskId) {
+        User currentUser = getCurrentUser();
+        Task task = taskRepository.findByIdAndUserId(taskId, currentUser.getId())
+                .orElseThrow(() -> new RuntimeException("Task not found or not authorized"));
+        taskRepository.delete(task);
+    }
+
+    public TaskDTO updateTaskForCurrentUser(Long taskId, TaskDTO taskDTO) {
+        User currentUser = getCurrentUser();
+        Task task = taskRepository.findByIdAndUserId(taskId, currentUser.getId())
+                .orElseThrow(() -> new RuntimeException("Task not found or not authorized"));
+        task.setTitle(taskDTO.getTitle());
+        task.setDescription(taskDTO.getDescription());
+        taskRepository.save(task);
+        return taskMapper.mapToDTOResponse(task);
+    }
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUserName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

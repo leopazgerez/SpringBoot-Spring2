@@ -16,9 +16,9 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String UserEmail) throws UsernameNotFoundException {
-        com.mindhub.todolist.models.User userEntity = userRepository.findByEmail(UserEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with UserEmail: " + UserEmail));
-        return new User(userEntity.getUserName(), userEntity.getPassword(), AuthorityUtils.createAuthorityList(userEntity.getRoleType().toString()));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        com.mindhub.todolist.models.User userEntity = userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with UserName: " + username));
+        return new User(userEntity.getEmail(), userEntity.getPassword(), AuthorityUtils.createAuthorityList(userEntity.getRoleType().toString()));
     }
 }

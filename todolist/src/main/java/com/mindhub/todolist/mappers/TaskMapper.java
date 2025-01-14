@@ -26,4 +26,7 @@ public class TaskMapper {
         task.setStatus(taskDTO.getStatus());
         return task;
     }
+
+    TaskMapper() {
+    }
 }
