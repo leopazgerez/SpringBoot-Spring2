@@ -43,7 +43,7 @@ public class SecurityConfig {
                         authorizeRequests
                                 .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html", "/h2-console/**").permitAll()
                                 .requestMatchers("auth/**", "/index.html").permitAll()
-                                .requestMatchers("user/**").hasAuthority("USER")
+                                .requestMatchers("users/**").hasAuthority("USER")
                                 .requestMatchers("admin/**").hasAuthority("ADMIN")// Allow public access to specific endpoints
                                 .anyRequest().denyAll() // All other requests must be authenticated
                 ).formLogin(AbstractHttpConfigurer::disable)

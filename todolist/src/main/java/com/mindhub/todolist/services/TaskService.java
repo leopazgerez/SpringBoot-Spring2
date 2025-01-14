@@ -1,12 +1,11 @@
 package com.mindhub.todolist.services;
 
 import com.mindhub.todolist.dtos.TaskDTO;
-import com.mindhub.todolist.models.Task;
 
 import java.util.List;
 
 public interface TaskService {
-    TaskDTO createTask(TaskDTO task);
+    TaskDTO createTask(TaskDTO taskDTO);
 
     TaskDTO updateTask(TaskDTO task, Long taskId);
 

@@ -10,6 +10,8 @@ import com.mindhub.todolist.repositories.UserRepository;
 import com.mindhub.todolist.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,23 +49,24 @@ public class UserServiceImpl implements UserService {
 
     //Actualizo los datos del usuario que encuentro
     @Override
-    public UserDTO updateUser(UserDTO userDTO, String username) {
-        if (userRepository.existsByUserName(username)) {
-            return userRepository.findByUserName(username).map(existingUser -> {
-                existingUser.setUserName(userDTO.getName());
-                existingUser.setEmail(userDTO.getEmail());
-//                guardo en la base de datos
-                User updatedUser = userRepository.save(existingUser);
-                return userMapper.mapToResponseDTO(updatedUser);
-            }).orElseThrow(() -> new UserNotFoundException("User not found"));
-        } else {
-            throw new UserNotFoundException("User not found");
-        }
+    public UserDTO updateUser(UserDTO userDTO) {
+        User finduser = getCurrentUser();
+        finduser.setEmail(userDTO.getEmail());
+        finduser.setUserName(userDTO.getName());
+        User updatedUser = userRepository.save(finduser);
+        return userMapper.mapToResponseDTO(updatedUser);
     }
 
     @Override
     public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
         userRepository.delete(user);
+    }
+
+
+    private User getCurrentUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUserName(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

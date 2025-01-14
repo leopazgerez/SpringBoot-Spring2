@@ -29,7 +29,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public TaskDTO createTask(TaskDTO taskDTO) {
         Task newTask = new Task();
-        User user = userRepository.findById(taskDTO.getUser().getId()).orElseThrow(() -> new UserNotFoundException("User not found"));
+        User user = getCurrentUser();
         newTask.setStatus(taskDTO.getStatus());
         newTask.setDescription(taskDTO.getDescription());
         newTask.setTitle(taskDTO.getTitle());
@@ -76,6 +76,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public void deleteTaskForCurrentUser(Long taskId) {
+
         User currentUser = getCurrentUser();
         Task task = taskRepository.findByIdAndUserId(taskId, currentUser.getId())
                 .orElseThrow(() -> new RuntimeException("Task not found or not authorized"));

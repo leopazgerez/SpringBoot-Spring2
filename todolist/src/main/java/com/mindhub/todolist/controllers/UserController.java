@@ -59,9 +59,8 @@ public class UserController {
     })
 
     @PutMapping("/update")
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDto, Authentication authentication) {
-        String username = authentication.getName();
-        return ResponseEntity.ok(userService.updateUser(userDto, username));
+    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO userDto) {
+        return ResponseEntity.ok(userService.updateUser(userDto));
     }
 
 
@@ -76,24 +75,46 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @Operation(summary = "Create a new task for the current user", description = "Creates a new task associated with the currently logged-in user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Task successfully created", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TaskDTO.class))),
+            @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input data", content = @Content)
+    })
     @PostMapping
-    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskRequest) {
-        TaskDTO task = taskService.createTask(taskRequest);
+    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
+        TaskDTO task = taskService.createTask(taskDTO);
         return ResponseEntity.ok(task);
     }
 
+    @Operation(summary = "Get tasks for the current user", description = "Retrieves all tasks associated with the currently logged-in user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Tasks retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TaskDTO.class))),
+            @ApiResponse(responseCode = "204", description = "No tasks found for the current user", content = @Content),
+    })
     @GetMapping
     public ResponseEntity<List<TaskDTO>> getUserTasks() {
         List<TaskDTO> tasks = taskService.getTasksForCurrentUser();
         return ResponseEntity.ok(tasks);
     }
 
+    @Operation(summary = "Delete a task for the current user", description = "Deletes a specific task associated with the currently logged-in user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Task deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "Task not found", content = @Content)
+    })
     @DeleteMapping("/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable Long taskId) {
         taskService.deleteTaskForCurrentUser(taskId);
         return ResponseEntity.ok("Task deleted successfully");
     }
 
+    @Operation(summary = "Update a task for the current user", description = "Updates a specific task associated with the currently logged-in user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Task updated successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TaskDTO.class))),
+            @ApiResponse(responseCode = "404", description = "Task not found", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input data", content = @Content)
+    })
     @PutMapping("/{taskId}")
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @RequestBody TaskDTO taskDTO) {
         TaskDTO updatedTask = taskService.updateTaskForCurrentUser(taskId, taskDTO);

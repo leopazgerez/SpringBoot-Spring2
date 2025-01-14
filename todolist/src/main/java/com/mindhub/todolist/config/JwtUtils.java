@@ -16,7 +16,7 @@ import java.util.Date;
 public class JwtUtils {
     //La clave secreta que se va atulizar para firmar el JWT
     private final SecretKey secretKey;
-    //Este anotador + el formato "${value}" le estamos diciendo a java que vaya a buscar ese string en el aplplication.property
+    //Este anotador más el formato "${value}" le estamos diciendo a java que vaya a buscar ese string en el application.property
     // Estos datos sensibles deben ser obtenidos de variable de entornos.
     @Value("${jwt.expiration}")
     private long expiration;
@@ -25,6 +25,7 @@ public class JwtUtils {
         this.secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
     }
 
+    //  Genera el token
     public String generateToken(String username) {
         return Jwts.builder()// Usa "claim" para agregar otros campos
                 .subject(username)
