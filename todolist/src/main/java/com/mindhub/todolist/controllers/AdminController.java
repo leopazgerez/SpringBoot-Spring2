@@ -26,7 +26,7 @@ public class AdminController {
                     content = @Content(mediaType = "application/json",
                             schema = @Schema(implementation = TaskDTO.class)))
     })
-    @GetMapping("/getTasks")
+    @GetMapping("/tasks/getAllTasks")
     public ResponseEntity<List<TaskDTO>> getAllTasks() {
         List<TaskDTO> tasks = taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
@@ -37,7 +37,7 @@ public class AdminController {
             @ApiResponse(responseCode = "200", description = "Task deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Task not found")
     })
-    @DeleteMapping("/{taskId}")
+    @DeleteMapping("/tasks/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable Long taskId) {
         taskService.deleteTask(taskId);
         return ResponseEntity.ok("Task deleted successfully");
@@ -51,9 +51,16 @@ public class AdminController {
             @ApiResponse(responseCode = "404", description = "Task not found"),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input data")
     })
-    @PutMapping("/{taskId}")
+
+    @PutMapping("/tasks/{taskId}")
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @RequestBody TaskDTO taskDTO) {
         TaskDTO updatedTask = taskService.updateTask(taskDTO, taskId);
+        return ResponseEntity.ok(updatedTask);
+    }
+
+    @PostMapping("/tasks")
+    public ResponseEntity<?> createTaskForUser(@RequestBody TaskDTO taskDTO) {
+        TaskDTO updatedTask = taskService.createTask(taskDTO);
         return ResponseEntity.ok(updatedTask);
     }
 }

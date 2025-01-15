@@ -1,5 +1,7 @@
 package com.mindhub.todolist.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mindhub.todolist.enums.RoleType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,6 +20,7 @@ public class User {
     private String userName, password;
     @Column(unique = true)
     private String email;
+    @JsonManagedReference // se coloca donde se define el mappedBy. Le indica a jackson que esta propiedad debe ser serializada
     @OneToMany(mappedBy = "user")
     private List<Task> tasks;
     @Enumerated(EnumType.STRING)

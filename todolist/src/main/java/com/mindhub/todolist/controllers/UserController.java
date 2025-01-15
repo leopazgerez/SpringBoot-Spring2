@@ -81,7 +81,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Task successfully created", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TaskDTO.class))),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input data", content = @Content)
     })
-    @PostMapping
+    @PostMapping("/tasks")
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
         TaskDTO task = taskService.createTask(taskDTO);
         return ResponseEntity.ok(task);
@@ -92,7 +92,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Tasks retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = TaskDTO.class))),
             @ApiResponse(responseCode = "204", description = "No tasks found for the current user", content = @Content),
     })
-    @GetMapping
+    @GetMapping("/tasks/getAllTasks")
     public ResponseEntity<List<TaskDTO>> getUserTasks() {
         List<TaskDTO> tasks = taskService.getTasksForCurrentUser();
         return ResponseEntity.ok(tasks);
@@ -103,7 +103,7 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Task deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Task not found", content = @Content)
     })
-    @DeleteMapping("/{taskId}")
+    @DeleteMapping("/tasks/{taskId}")
     public ResponseEntity<?> deleteTask(@PathVariable Long taskId) {
         taskService.deleteTaskForCurrentUser(taskId);
         return ResponseEntity.ok("Task deleted successfully");
@@ -115,7 +115,7 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "Task not found", content = @Content),
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input data", content = @Content)
     })
-    @PutMapping("/{taskId}")
+    @PutMapping("/tasks/{taskId}")
     public ResponseEntity<?> updateTask(@PathVariable Long taskId, @RequestBody TaskDTO taskDTO) {
         TaskDTO updatedTask = taskService.updateTaskForCurrentUser(taskId, taskDTO);
         return ResponseEntity.ok(updatedTask);

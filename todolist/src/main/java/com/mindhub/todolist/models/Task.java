@@ -1,5 +1,7 @@
 package com.mindhub.todolist.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mindhub.todolist.enums.TaskStatus;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -15,6 +17,8 @@ public class Task {
     private String title, description;
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
+    // Le indica a jackson que no debe ser serializada. Evita recursividad. No es lo recomendable para proyectos grandes. Lo mejor es usar dtos
+    @JsonBackReference
     @ManyToOne()
     private User user;
 

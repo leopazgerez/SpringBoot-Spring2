@@ -10,7 +10,7 @@ public class TaskDTO {
     private Long id;
     private String title, description;
     private TaskStatus status;
-    private User user;
+    private UserDTO user;
 
     public TaskDTO() {
     }
@@ -20,7 +20,6 @@ public class TaskDTO {
         this.title = task.getTitle();
         this.description = task.getDescription();
         this.status = task.getStatus();
-        this.user = task.getUser();
     }
 
 
@@ -56,11 +55,11 @@ public class TaskDTO {
         this.status = status;
     }
 
-    public User getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 }
