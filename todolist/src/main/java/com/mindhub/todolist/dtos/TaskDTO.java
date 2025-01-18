@@ -3,7 +3,6 @@ package com.mindhub.todolist.dtos;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mindhub.todolist.enums.TaskStatus;
 import com.mindhub.todolist.models.Task;
-import com.mindhub.todolist.models.User;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskDTO {

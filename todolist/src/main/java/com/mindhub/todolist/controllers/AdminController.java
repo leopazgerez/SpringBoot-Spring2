@@ -1,7 +1,6 @@
 package com.mindhub.todolist.controllers;
 
 import com.mindhub.todolist.dtos.TaskDTO;
-import com.mindhub.todolist.models.Task;
 import com.mindhub.todolist.services.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
