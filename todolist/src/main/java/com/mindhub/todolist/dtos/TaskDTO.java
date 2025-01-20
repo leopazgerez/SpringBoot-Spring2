@@ -1,5 +1,6 @@
 package com.mindhub.todolist.dtos;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mindhub.todolist.enums.TaskStatus;
 import com.mindhub.todolist.models.Task;
@@ -9,6 +10,7 @@ public class TaskDTO {
     private Long id;
     private String title, description;
     private TaskStatus status;
+    @JsonBackReference
     private UserDTO user;
 
     public TaskDTO() {

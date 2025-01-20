@@ -1,6 +1,7 @@
 package com.mindhub.todolist.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mindhub.todolist.models.Task;
 import com.mindhub.todolist.models.User;
 
@@ -10,6 +11,7 @@ import java.util.List;
 public class UserDTO {
     private Long id;
     private String name, email, password;
+    @JsonManagedReference
     private List<Task> tasks;
 
     public UserDTO() {

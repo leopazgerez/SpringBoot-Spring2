@@ -7,6 +7,7 @@ import com.mindhub.todolist.services.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,7 +35,7 @@ public class AuthController {
             @ApiResponse(responseCode = "200", description = "User registered successfully")
     })
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody SignupUser signupUser) {
+    public ResponseEntity<?> signup(@RequestBody SignupUser signupUser) throws BadRequestException {
         authService.signup(signupUser);
         return ResponseEntity.ok("User registered successfully");
     }

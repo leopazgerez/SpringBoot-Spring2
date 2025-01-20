@@ -8,6 +8,7 @@ import com.mindhub.todolist.mappers.UserMapper;
 import com.mindhub.todolist.models.User;
 import com.mindhub.todolist.repositories.UserRepository;
 import com.mindhub.todolist.services.AuthService;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,15 @@ public class AuthServiceImpl implements AuthService {
     private UserMapper userMapper;
 
     @Override
-    public void signup(SignupUser signupUser) {
+    public void signup(SignupUser signupUser) throws BadRequestException {
         if (userRepository.existsByEmail(signupUser.email())) {
             throw new EmailAlreadyExistException("Email already exists");
         }
         if (userRepository.existsByUserName(signupUser.username())) {
             throw new UserNameAlreadyExistException("Username already exists");
+        }
+        if (signupUser.email().isEmpty() | (signupUser.password().isEmpty() | signupUser.password().length() < 4) | signupUser.username().isEmpty()) {
+            throw new BadRequestException();
         }
         String encryptPass = passwordEncoder.encode(signupUser.password());
         User user = userMapper.mapToEntity(signupUser, encryptPass);
