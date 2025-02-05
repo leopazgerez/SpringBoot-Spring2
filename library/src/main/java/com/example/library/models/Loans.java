@@ -3,6 +3,7 @@ package com.example.library.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 import java.util.Date;
 
@@ -11,10 +12,15 @@ public class Loans {
     @Id
     @GeneratedValue
     private Long id;
+    @ManyToOne()
     private BookCopy bookCopy;
+    @ManyToOne
     private User user;
     private Date loanDate;
     private Date loanRepaymentDate;
+
+    Loans() {
+    }
 
     public Long getId() {
         return id;

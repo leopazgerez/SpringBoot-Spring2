@@ -2,8 +2,11 @@ package com.example.library.models;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name = "User")
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,8 +14,13 @@ public class User {
     private Long code;
     private String name;
     private String number;
-    @OneToOne(mappedBy = "address")
+    @OneToOne()
     private Address address;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Loans> loans = new HashSet<>();
+
+    User() {
+    }
 
     public Long getId() {
         return id;
@@ -48,5 +56,13 @@ public class User {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Set<Loans> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Set<Loans> loans) {
+        this.loans = loans;
     }
 }

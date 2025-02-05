@@ -12,8 +12,11 @@ public class Author {
     private Long id;
     private Long code;
     private String name;
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> books = new HashSet<>();
+
+    Author() {
+    }
 
     public Long getId() {
         return id;

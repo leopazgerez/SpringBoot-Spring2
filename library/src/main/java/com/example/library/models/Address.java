@@ -10,8 +10,12 @@ public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Location location;
-    private String name;
+    private String street;
+    private String number;
+
+
+    Address() {
+    }
 
     public Long getId() {
         return id;
@@ -21,19 +25,19 @@ public class Address {
         this.id = id;
     }
 
-    public Location getLocation() {
-        return location;
+    public String getLocation() {
+        return number;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocation(String number) {
+        this.number = number;
     }
 
-    public String getName() {
-        return name;
+    public String getStreet() {
+        return street;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String street) {
+        this.street = street;
     }
 }

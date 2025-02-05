@@ -12,12 +12,16 @@ public class Book {
     private Long id;
     private Long code;
     private String title;
-    private Long ISBN;
+    private String ISBN;
     private String editorial;
     @ManyToOne()
+    @JoinColumn(name = "author_id")
     private Author author;
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BookCopy> bookCopies = new HashSet<>();
+
+    Book() {
+    }
 
     public Long getId() {
         return id;
@@ -39,11 +43,11 @@ public class Book {
         this.title = title;
     }
 
-    public Long getISBN() {
+    public String getISBN() {
         return ISBN;
     }
 
-    public void setISBN(Long ISBN) {
+    public void setISBN(String ISBN) {
         this.ISBN = ISBN;
     }
 

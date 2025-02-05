@@ -9,8 +9,12 @@ public class Location {
     private Long id;
     private String section;
     private String shelve;
-    @OneToOne(mappedBy = "user")
-    private User user;
+    @OneToOne()
+    private BookCopy bookCopy;
+
+    Location() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -29,5 +33,13 @@ public class Location {
 
     public void setShelve(String shelve) {
         this.shelve = shelve;
+    }
+
+    public BookCopy getBookCopy() {
+        return bookCopy;
+    }
+
+    public void setBookCopy(BookCopy bookCopy) {
+        this.bookCopy = bookCopy;
     }
 }
