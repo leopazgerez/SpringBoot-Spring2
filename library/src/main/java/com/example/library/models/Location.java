@@ -1,35 +1,33 @@
 package com.example.library.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long longitude;
-    private Long latitude;
-
+    private String section;
+    private String shelve;
+    @OneToOne(mappedBy = "user")
+    private User user;
     public Long getId() {
         return id;
     }
 
-    public Long getLongitude() {
-        return longitude;
+    public String getSection() {
+        return section;
     }
 
-    public void setLongitude(Long longitude) {
-        this.longitude = longitude;
+    public void setSection(String section) {
+        this.section = section;
     }
 
-    public Long getLatitude() {
-        return latitude;
+    public String getShelve() {
+        return shelve;
     }
 
-    public void setLatitude(Long latitude) {
-        this.latitude = latitude;
+    public void setShelve(String shelve) {
+        this.shelve = shelve;
     }
 }

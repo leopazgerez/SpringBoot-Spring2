@@ -14,8 +14,10 @@ public class Book {
     private String title;
     private Long ISBN;
     private String editorial;
+    @ManyToOne()
+    private Author author;
     @OneToMany(mappedBy = "book")
-    private Set<BookItem> bookItems = new HashSet<>();
+    private Set<BookCopy> bookCopies = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -53,11 +55,19 @@ public class Book {
         this.editorial = editorial;
     }
 
-    public Set<BookItem> getBookItems() {
-        return bookItems;
+    public Set<BookCopy> getBookItems() {
+        return bookCopies;
     }
 
-    public void setBookItems(Set<BookItem> bookItems) {
-        this.bookItems = bookItems;
+    public void setBookItems(Set<BookCopy> bookCopies) {
+        this.bookCopies = bookCopies;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 }

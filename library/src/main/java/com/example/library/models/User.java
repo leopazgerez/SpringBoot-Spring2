@@ -1,18 +1,17 @@
 package com.example.library.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "User")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long code;
     private String name;
-    private PhoneNumber phoneNumber;
+    private String number;
+    @OneToOne(mappedBy = "address")
     private Address address;
 
     public Long getId() {
@@ -43,11 +42,11 @@ public class User {
         this.address = address;
     }
 
-    public PhoneNumber getPhoneNumber() {
-        return phoneNumber;
+    public String getNumber() {
+        return number;
     }
 
-    public void setPhoneNumber(PhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

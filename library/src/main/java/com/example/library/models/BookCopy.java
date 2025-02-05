@@ -3,20 +3,21 @@ package com.example.library.models;
 import jakarta.persistence.*;
 
 @Entity
-public class BookItem {
+public class BookCopy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long code;
-    private Long location;
+    @OneToOne(mappedBy = "location")
+    private Location location;
     @ManyToOne()
     private Book book;
 
-    public Long getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Long location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
