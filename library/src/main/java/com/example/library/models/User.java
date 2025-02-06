@@ -19,7 +19,14 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Loans> loans = new HashSet<>();
 
-    User() {
+    public User(Long code, String name, String number, Address address) {
+        this.code = code;
+        this.name = name;
+        this.number = number;
+        this.address = address;
+    }
+
+    public User() {
     }
 
     public Long getId() {
@@ -62,7 +69,8 @@ public class User {
         return loans;
     }
 
-    public void setLoans(Set<Loans> loans) {
-        this.loans = loans;
+    public void addLoans(Loans loan) {
+        loan.setUser(this);
+        loans.add(loan);
     }
 }

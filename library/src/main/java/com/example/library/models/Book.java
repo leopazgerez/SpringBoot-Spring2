@@ -20,7 +20,16 @@ public class Book {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BookCopy> bookCopies = new HashSet<>();
 
-    Book() {
+    public Book(Long code, String title, String ISBN, String editorial, Author author) {
+        this.code = code;
+        this.title = title;
+        this.ISBN = ISBN;
+        this.editorial = editorial;
+        this.author = author;
+    }
+
+    public Book() {
+
     }
 
     public Long getId() {
@@ -73,5 +82,10 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public void addBookCopy(BookCopy bookCopy) {
+        bookCopy.setBook(this);
+        bookCopies.add(bookCopy);
     }
 }

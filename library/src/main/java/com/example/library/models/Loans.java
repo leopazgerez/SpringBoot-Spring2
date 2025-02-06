@@ -12,14 +12,19 @@ public class Loans {
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToOne()
+    @ManyToOne
     private BookCopy bookCopy;
     @ManyToOne
     private User user;
     private Date loanDate;
     private Date loanRepaymentDate;
 
-    Loans() {
+    public Loans(BookCopy bookCopy, User user) {
+        this.bookCopy = bookCopy;
+        this.user = user;
+    }
+
+    public Loans() {
     }
 
     public Long getId() {

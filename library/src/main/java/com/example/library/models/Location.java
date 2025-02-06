@@ -12,7 +12,12 @@ public class Location {
     @OneToOne()
     private BookCopy bookCopy;
 
-    Location() {
+    public Location(String section, String shelve) {
+        this.section = section;
+        this.shelve = shelve;
+    }
+
+    public Location() {
     }
 
     public Long getId() {

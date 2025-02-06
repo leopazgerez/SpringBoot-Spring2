@@ -20,16 +20,13 @@ public class BookCopy {
     @OneToMany(mappedBy = "bookCopy", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Loans> loans = new HashSet<>();
 
-    BookCopy() {
+    public BookCopy(Long code, Location location, Book book) {
+        this.code = code;
+        this.location = location;
+        this.book = book;
     }
-
-//    public Location getLocation() {
-//        return location;
-//    }
-//
-//    public void setLocation(Location location) {
-//        this.location = location;
-//    }
+    public BookCopy() {
+    }
 
     public Long getCode() {
         return code;
@@ -57,6 +54,11 @@ public class BookCopy {
 
     public void setLoans(Set<Loans> loans) {
         this.loans = loans;
+    }
+
+    public void addLoan(Loans loan) {
+        loan.setBookCopy(this);
+        loans.add(loan);
     }
 
     public Location getLocation() {

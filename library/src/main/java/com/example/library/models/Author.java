@@ -12,10 +12,16 @@ public class Author {
     private Long id;
     private Long code;
     private String name;
-    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Book> books = new HashSet<>();
 
-    Author() {
+    public Author(Long code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
+    public Author() {
+
     }
 
     public Long getId() {
@@ -44,5 +50,10 @@ public class Author {
 
     public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    public void addBook(Book book) {
+        book.setAuthor(this);
+        books.add(book);
     }
 }

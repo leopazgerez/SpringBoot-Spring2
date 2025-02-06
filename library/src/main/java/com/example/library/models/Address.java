@@ -14,7 +14,12 @@ public class Address {
     private String number;
 
 
-    Address() {
+    public Address(String street, String number) {
+        this.number = number;
+        this.street = street;
+    }
+
+    public Address() {
     }
 
     public Long getId() {
