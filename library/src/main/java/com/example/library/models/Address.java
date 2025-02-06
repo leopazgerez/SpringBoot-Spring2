@@ -30,19 +30,19 @@ public class Address {
         this.id = id;
     }
 
-    public String getLocation() {
-        return number;
-    }
-
-    public void setLocation(String number) {
-        this.number = number;
-    }
-
     public String getStreet() {
         return street;
     }
 
     public void setName(String street) {
         this.street = street;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.library.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -13,6 +14,9 @@ public class BookCopy {
     private Long code;
     @OneToOne()
     private Location location;
+//    @ManyToOne
+//    @JoinColumn(name = "user_id")
+//    private User user;
     @ManyToOne()
     @JoinColumn(name = "book_id", nullable = false)
     private Book book;
@@ -47,7 +51,7 @@ public class BookCopy {
     public void setBook(Book book) {
         this.book = book;
     }
-
+    @JsonIgnore
     public Set<Loans> getLoans() {
         return loans;
     }
@@ -68,4 +72,12 @@ public class BookCopy {
     public void setLocation(Location location) {
         this.location = location;
     }
+//    @JsonIgnore
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 }

@@ -1,5 +1,6 @@
 package com.example.library.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -39,7 +40,7 @@ public class Location {
     public void setShelve(String shelve) {
         this.shelve = shelve;
     }
-
+    @JsonIgnore
     public BookCopy getBookCopy() {
         return bookCopy;
     }

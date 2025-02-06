@@ -1,5 +1,6 @@
 package com.example.library.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -65,6 +66,7 @@ public class User {
         this.number = number;
     }
 
+    @JsonIgnore
     public Set<Loans> getLoans() {
         return loans;
     }

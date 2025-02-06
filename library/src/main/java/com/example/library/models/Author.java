@@ -1,5 +1,6 @@
 package com.example.library.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -43,7 +44,7 @@ public class Author {
     public void setName(String name) {
         this.name = name;
     }
-
+    @JsonIgnore
     public Set<Book> getBooks() {
         return books;
     }

@@ -1,28 +1,30 @@
 package com.example.library.services.implementation;
 
 import com.example.library.models.Loans;
-import com.example.library.services.LoanService;
+import com.example.library.models.User;
+import com.example.library.services.UserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements LoanService {
+public class UserServiceImpl implements UserService {
+
     @Override
-    public void createLoan() {
+    public void createUser() {
 
     }
 
     @Override
-    public Loans getLoan() {
+    public User getUser() {
         return null;
     }
 
     @Override
-    public Loans updateLoan() {
+    public User updateUser() {
         return null;
     }
 
     @Override
-    public void deleteLoan() {
+    public void deleteUser() {
 
     }
 }

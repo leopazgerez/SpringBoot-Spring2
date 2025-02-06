@@ -22,6 +22,8 @@ public class Loans {
     public Loans(BookCopy bookCopy, User user) {
         this.bookCopy = bookCopy;
         this.user = user;
+        loanDate = new Date();
+        loanRepaymentDate = null;
     }
 
     public Loans() {
