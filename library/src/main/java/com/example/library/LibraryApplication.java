@@ -24,7 +24,7 @@ public class LibraryApplication {
                                       LocationRepository locationRepository,
                                       AddressRepository addressRepository) {
         return args -> {
-//          <<<<<<<<<<<<<<<<<<<<<<<<<<< Usuarios y direcciones
+//          <<<<<<<<<<<<<<<<<<<<<<<<<<< Users and address
             Address address1 = new Address("Simon Bolivar", "1100");
             addressRepository.save(address1);
             Address address2 = new Address("Mariano Boedo", "656");
@@ -38,7 +38,8 @@ public class LibraryApplication {
             User user3 = new User(14L, "Ramón", "3877434092", address3);
             usersRepository.save(user3);
 //            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//            <<<<<<<<<<<<<<<<<<<<<<<<< Libros, autores, ejemplares,
+
+//            <<<<<<<<<<<<<<<<<<<<<<<<< Books
             Author author1 = new Author(2L, "Enrique");
             authorsRepository.save(author1);
             Author author2 = new Author(3L, "Kike");
@@ -51,6 +52,9 @@ public class LibraryApplication {
             booksRepository.save(book2);
             Book book3 = new Book(4L, "Las maravillas del code V3", "ñalsffkdj33", "Inmaduras", author3);
             booksRepository.save(book3);
+//            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//            <<<<<<<<<<<<<<<<<<<<<<<<<<< Books Copies' location
             Location location = new Location("A", "3");
             locationRepository.save(location);
             Location location2 = new Location("A", "4");
@@ -70,6 +74,9 @@ public class LibraryApplication {
             Location location9 = new Location("A", "11");
             locationRepository.save(location9);
             List<Location> allLocations = locationRepository.findAll();
+//            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//            <<<<<<<<<<<<<<<<<<<<<<<< Books Copies
             BookCopy bookCopy1 = new BookCopy(2L, location, book1);
             bookCopiesRepository.save(bookCopy1);
             Location found = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location.getShelve())).findFirst().get();
