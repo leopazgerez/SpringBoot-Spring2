@@ -77,21 +77,21 @@ public class LibraryApplication {
 //            >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 //            <<<<<<<<<<<<<<<<<<<<<<<< Books Copies
-            BookCopy bookCopy1 = new BookCopy(2L, location, book1);
-            bookCopiesRepository.save(bookCopy1);
-            Location found = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location.getShelve())).findFirst().get();
-            found.setBookCopy(bookCopy1);
-            locationRepository.save(found);
-            BookCopy bookCopy2 = new BookCopy(3L, location2, book1);
-            bookCopiesRepository.save(bookCopy2);
-            Location found2 = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location2.getShelve())).findFirst().get();
-            found2.setBookCopy(bookCopy2);
-            locationRepository.save(found2);
-            BookCopy bookCopy3 = new BookCopy(4L, location3, book1);
-            bookCopiesRepository.save(bookCopy3);
-            Location found3 = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location3.getShelve())).findFirst().get();
-            found3.setBookCopy(bookCopy3);
-            locationRepository.save(found3);
+//            BookCopy bookCopy1 = new BookCopy(2L, location, book1);
+//            bookCopiesRepository.save(bookCopy1);
+//            Location found = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location.getShelve())).findFirst().get();
+//            found.setBookCopy(bookCopy1);
+//            locationRepository.save(found);
+//            BookCopy bookCopy2 = new BookCopy(3L, location2, book1);
+//            bookCopiesRepository.save(bookCopy2);
+//            Location found2 = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location2.getShelve())).findFirst().get();
+//            found2.setBookCopy(bookCopy2);
+//            locationRepository.save(found2);
+//            BookCopy bookCopy3 = new BookCopy(4L, location3, book1);
+//            bookCopiesRepository.save(bookCopy3);
+//            Location found3 = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location3.getShelve())).findFirst().get();
+//            found3.setBookCopy(bookCopy3);
+//            locationRepository.save(found3);
             BookCopy bookCopy4 = new BookCopy(5L, location4, book2);
             bookCopiesRepository.save(bookCopy4);
             Location found4 = allLocations.stream().filter(inLocation -> inLocation.getShelve().equals(location4.getShelve())).findFirst().get();
