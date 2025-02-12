@@ -1,5 +1,6 @@
 package com.example.library.controllers;
 
+import com.example.library.dtos.request.LoansRequestDTO;
 import com.example.library.dtos.response.LoanResponseDTO;
 import com.example.library.exceptions.BookException;
 import com.example.library.models.Book;
@@ -31,5 +32,10 @@ public class LoansController {
     @PostMapping("/create")
     public ResponseEntity<Set<LoanResponseDTO>> createLoanMultipleBook(@RequestBody List<Book> books) throws BookException {
         return new ResponseEntity<>(loanService.createLoanMultipleBook(books), HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<LoanResponseDTO> updateLoan(@RequestBody LoansRequestDTO loansRequestDTO) {
+        return new ResponseEntity<>(loanService.updateLoan(loansRequestDTO), HttpStatus.OK);
     }
 }

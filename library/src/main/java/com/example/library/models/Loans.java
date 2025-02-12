@@ -1,5 +1,6 @@
 package com.example.library.models;
 
+import com.example.library.dtos.request.LoansRequestDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -24,6 +25,13 @@ public class Loans {
         this.user = user;
         loanDate = new Date();
         loanRepaymentDate = null;
+    }
+
+    public Loans copyWith(LoansRequestDTO loansRequestDTO) {
+        this.bookCopy = loansRequestDTO.getBookCopy();
+        this.loanDate = loansRequestDTO.getLoanDate();
+        this.loanRepaymentDate = loansRequestDTO.getLoanRepaymentDate();
+        return this;
     }
 
     public Loans() {

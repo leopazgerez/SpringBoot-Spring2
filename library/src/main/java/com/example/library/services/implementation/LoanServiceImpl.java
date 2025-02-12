@@ -1,5 +1,6 @@
 package com.example.library.services.implementation;
 
+import com.example.library.dtos.request.LoansRequestDTO;
 import com.example.library.dtos.response.LoanResponseDTO;
 import com.example.library.exceptions.BookException;
 import com.example.library.models.Book;
@@ -131,12 +132,18 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public Set<LoanResponseDTO> getAllLoans() {
-        return loansRepository.findAll().stream().map(LoanResponseDTO::new).collect(Collectors.toSet());
+        return loansRepository
+                .findAll()
+                .stream()
+                .map(LoanResponseDTO::new)
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public Loans updateLoan() {
-        return null;
+    public LoanResponseDTO updateLoan(LoansRequestDTO loansRequestDTO) {
+        Loans loanFounded = loansRepository.findById(loansRequestDTO.getId()).orElseThrow();
+        loanFounded.copyWith(loansRequestDTO);
+        return new LoanResponseDTO(loansRepository.save(loanFounded));
     }
 
     @Override

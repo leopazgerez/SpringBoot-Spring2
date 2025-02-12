@@ -7,12 +7,14 @@ import com.example.library.models.User;
 import java.util.Date;
 
 public class LoanResponseDTO {
+    private Long id;
     private User user;
     private Date loanDate;
     private Date loanRepaymentDate;
     private BookCopy bookCopy;
 
     public LoanResponseDTO(Loans loan) {
+        this.id = loan.getId();
         this.user = loan.getUser();
         this.loanDate = loan.getLoanDate();
         this.loanRepaymentDate = loan.getLoanRepaymentDate();
@@ -52,5 +54,13 @@ public class LoanResponseDTO {
 
     public void setBookCopy(BookCopy bookCopy) {
         this.bookCopy = bookCopy;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

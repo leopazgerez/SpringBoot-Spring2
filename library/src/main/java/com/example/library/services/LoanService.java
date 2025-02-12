@@ -1,5 +1,6 @@
 package com.example.library.services;
 
+import com.example.library.dtos.request.LoansRequestDTO;
 import com.example.library.dtos.response.LoanResponseDTO;
 import com.example.library.exceptions.BookException;
 import com.example.library.models.Book;
@@ -17,7 +18,7 @@ public interface LoanService {
 
     Set<LoanResponseDTO> getAllLoans();
 
-    Loans updateLoan();
+    LoanResponseDTO updateLoan(LoansRequestDTO loansRequestDTO);
 
     void deleteLoan();
 }
