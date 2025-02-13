@@ -1,35 +1,30 @@
-package com.example.library.dtos.response;
+package com.example.library.dtos.request;
 
 import com.example.library.models.Author;
-import com.example.library.models.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.Min;
 
-public class BookResponseDTO {
+public class BookRequestDTO {
     private Long id;
     private Long code;
     private String title;
     private String ISBN;
     private String editorial;
     private Author author;
+    @Min(0L)
+    private Long amountCopies;
 
-    public BookResponseDTO(Book book) {
-        this.id = book.getId();
-        this.code = book.getCode();
-        this.title = book.getTitle();
-        this.ISBN = book.getISBN();
-        this.editorial = book.getEditorial();
-        this.author = book.getAuthor();
-    }
-
-    public BookResponseDTO() {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public BookRequestDTO(Long id, Long code, String title, String isbn, String editorial, Author author, Long amountCopies) {
         this.id = id;
+        this.code = code;
+        this.title = title;
+        ISBN = isbn;
+        this.editorial = editorial;
+        this.author = author;
+        this.amountCopies = amountCopies;
+    }
+
+    public BookRequestDTO() {
     }
 
     public Long getCode() {
@@ -70,5 +65,22 @@ public class BookResponseDTO {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public Long getAmountCopies() {
+        return amountCopies;
+    }
+
+    public void setAmountCopies(Long amountCopies) {
+        this.amountCopies = amountCopies;
+    }
+
+    @JsonIgnore
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

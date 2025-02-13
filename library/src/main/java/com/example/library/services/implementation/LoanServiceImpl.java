@@ -126,8 +126,8 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public Loans getLoanById() {
-        return null;
+    public LoanResponseDTO getLoanById(Long loanId) {
+        return new LoanResponseDTO(loansRepository.findById(loanId).orElseThrow());
     }
 
     @Override
@@ -140,6 +140,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public LoanResponseDTO updateLoan(LoansRequestDTO loansRequestDTO) {
         Loans loanFounded = loansRepository.findById(loansRequestDTO.getId()).orElseThrow();
         loanFounded.copyWith(loansRequestDTO);
@@ -147,7 +148,12 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void deleteLoan() {
-
+    public void deleteLoan(Long id) {
+        try {
+            loansRepository.deleteById(id);
+        } catch (Exception exception) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            throw exception;
+        }
     }
 }

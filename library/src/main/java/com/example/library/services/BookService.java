@@ -1,18 +1,18 @@
 package com.example.library.services;
 
+import com.example.library.dtos.request.BookRequestDTO;
 import com.example.library.dtos.response.BookResponseDTO;
-import com.example.library.models.Book;
 
 import java.util.Set;
 
 public interface BookService {
-    void createBook();
-
     Set<BookResponseDTO> getAllBooks();
 
-    Book getBook();
+    BookResponseDTO getBook(Long bookId);
 
-    Book updateBook();
+    BookResponseDTO updateBook(BookRequestDTO bookRequestDTO);
 
-    void deleteBook();
+    BookResponseDTO createBook(BookRequestDTO bookRequestDTO);
+
+    void deleteBook(Long bookId);
 }

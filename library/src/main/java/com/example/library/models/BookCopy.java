@@ -29,6 +29,9 @@ public class BookCopy {
         this.location = location;
         this.book = book;
     }
+    public BookCopy(Book book) {
+        this.book = book;
+    }
     public BookCopy() {
     }
 

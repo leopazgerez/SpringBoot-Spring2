@@ -38,4 +38,10 @@ public class LoansController {
     public ResponseEntity<LoanResponseDTO> updateLoan(@RequestBody LoansRequestDTO loansRequestDTO) {
         return new ResponseEntity<>(loanService.updateLoan(loansRequestDTO), HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{loanId}")
+    public ResponseEntity<LoanResponseDTO> deleteLoan(@PathVariable Long loanId) {
+        loanService.deleteLoan(loanId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

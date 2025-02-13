@@ -1,5 +1,6 @@
 package com.example.library.models;
 
+import com.example.library.dtos.request.BookRequestDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -31,6 +32,23 @@ public class Book {
 
     public Book() {
 
+    }
+
+    public Book(BookRequestDTO bookRequestDTO) {
+        this.code = bookRequestDTO.getCode();
+        this.title = bookRequestDTO.getTitle();
+        this.ISBN = bookRequestDTO.getISBN();
+        this.editorial = bookRequestDTO.getEditorial();
+        this.author = bookRequestDTO.getAuthor();
+    }
+
+    public Book copyWith(BookRequestDTO bookRequestDTO) {
+        this.code = bookRequestDTO.getCode();
+        this.title = bookRequestDTO.getTitle();
+        this.ISBN = bookRequestDTO.getISBN();
+        this.editorial = bookRequestDTO.getEditorial();
+        this.author = bookRequestDTO.getAuthor();
+        return this;
     }
 
     public Long getId() {

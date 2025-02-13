@@ -14,11 +14,11 @@ public interface LoanService {
 
     Set<LoanResponseDTO> createLoanMultipleBook(List<Book> books) throws BookException;
 
-    Loans getLoanById();
+    LoanResponseDTO getLoanById(Long loanId);
 
     Set<LoanResponseDTO> getAllLoans();
 
     LoanResponseDTO updateLoan(LoansRequestDTO loansRequestDTO);
 
-    void deleteLoan();
+    void deleteLoan(Long loanId);
 }
